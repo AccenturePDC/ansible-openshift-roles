@@ -1,0 +1,42 @@
+- block:
+    - name: Install Required Packages
+      yum: name={{ item }} state=present
+      with_items: "{{ list_of_oc_packages }}"
+  
+    - name: Update Packages
+      yum: name=* state=latest
+  
+    - name: Install and Enable NetworkManager
+      yum: name=NetworkManager state=present
+  
+    - name: Enable and Start NetworkManager
+      service: name=NetworkManager enabled=yes state=started
+ 
+    - name: Install Docker
+      yum: name=docker state=present
+  
+    - name: Update Docker Options
+      lineinfile: dest=/etc/sysconfig/docker regexp='^OPTIONS=' line={{ docker_opts }}
+
+    - name: Remove docker-storage-setup file if it exists
+      file: path=/etc/sysconfig/docker-storage-setup state=absent
+      
+    - name: Create docker-storage-setup file
+      blockinfile:
+        create: yes
+        dest: /etc/sysconfig/docker-storage-setup
+        block: |
+          DEVS={{ device_name }}
+          VG=docker-vg
+  
+    - name: Remove Default Docker Storage Library
+      file: path=/var/lib/docker state=absent
+  
+    - name: Start Docker Storage Setup
+      shell: docker-storage-setup
+ 
+    - name: Enable and Start Docker Service
+      service: name=docker enabled=yes state=started
+
+  become: true
+  become_user: root

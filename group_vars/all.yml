@@ -1,0 +1,11 @@
+
+device_name: '/dev/xvdb'
+
+list_of_oc_packages:
+  - wget
+  - git
+  - net-tools
+  - bind-utils
+  - iptables-services
+  - bridge-utils
+  - bash-completion
