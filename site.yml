@@ -1,0 +1,4 @@
+- hosts: "OSEv3:children"
+  roles:
+    - openshift_prereq
+
