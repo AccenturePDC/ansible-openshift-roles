@@ -1,8 +1,13 @@
 # General Usage
 
-The ansible playbook for prepare the requirements of Openshift v3 based from [Openshift Requirements](https://docs.openshift.org/latest/install_config/install/prerequisites.html)
+The ansible playbook to prepare/install the requirements of Openshift v3 based from [Openshift Requirements](https://docs.openshift.org/latest/install_config/install/prerequisites.html)
 
 ## Export the Shell Variables
+
+This script assumes that you already have provisioned Centos7 Virtual Machines:  
+
+ - ec2-52-1-2-34-aws.com
+ - ec2-10-1-2-33-aws.com
 
 ```bash
 # The Ip addresses and hostnames of the hosts in the cluster
