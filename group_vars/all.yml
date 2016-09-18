@@ -1,6 +1,8 @@
 
 device_name: '/dev/xvdb'
 
+docker_opts: 'OPTIONS="--selinux-enabled --insecure-registry 172.30.0.0/16 --log-opt max-size=1M --log-opt max-file=3"'
+
 list_of_oc_packages:
   - wget
   - git
